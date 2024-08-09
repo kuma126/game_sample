@@ -319,9 +319,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 045a0000
       m_LastClickedID: 0
-      m_ExpandedIDs: eee6ffffc6e7ffffb0e8ffff2cfbffff
+      m_ExpandedIDs: 34faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 711.86115
     speed: 2
-    m_Value: 681.20685
+    m_Value: 711.86115
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -999,14 +999,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scenes
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\game_sample\test
+  m_LastProjectPath: C:\home\gameJamTest\game_sample\test
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ca590000
-    m_LastClickedID: 22986
-    m_ExpandedIDs: 00000000c459000000ca9a3bffffff7f
+    m_SelectedIDs: 6e1e0000
+    m_LastClickedID: 7790
+    m_ExpandedIDs: 00000000f859000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1034,7 +1034,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c4590000
+    m_ExpandedIDs: 00000000f8590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
