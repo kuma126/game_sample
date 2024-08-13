@@ -930,9 +930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kayaku1: {fileID: 7434563919062374667, guid: 73955a8d4f65937479b0ef863321ec06, type: 3}
-  kayaku2: {fileID: 8224078347691727514, guid: 5b5a31f5673bd504ead97b467ebcd818, type: 3}
-  kayaku3: {fileID: 3014539875400764036, guid: fd322de2e3e07e84d877c6120479a25d, type: 3}
-  kayaku4: {fileID: 6733714745986604091, guid: f466fd68e4b0f87418575ef8194ab44e, type: 3}
+  kayaku2: {fileID: 3014539875400764036, guid: fd322de2e3e07e84d877c6120479a25d, type: 3}
+  kayaku3: {fileID: 6733714745986604091, guid: f466fd68e4b0f87418575ef8194ab44e, type: 3}
+  kayaku4: {fileID: 8224078347691727514, guid: 5b5a31f5673bd504ead97b467ebcd818, type: 3}
 --- !u!4 &1250563420
 Transform:
   m_ObjectHideFlags: 0
@@ -942,7 +942,7 @@ Transform:
   m_GameObject: {fileID: 1250563418}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 10, z: 5}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
