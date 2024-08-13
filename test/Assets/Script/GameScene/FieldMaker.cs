@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-@ brief ƒ}ƒbƒv‚ğì‚éC“ïˆÕ“x‚É‰‚¶‚Ä•ÏX
+@ brief ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½Õ“xï¿½É‰ï¿½ï¿½ï¿½ï¿½Ä•ÏX
 */
 public class FieldMaker : MonoBehaviour
 {
     public static FieldMaker Instance = null;
-    private int mapLevel;   // ƒ}ƒbƒv‚ÌƒŒƒxƒ‹‚ğŒˆ‚ß‚é•Ï”
-    public GameObject Obj0;  // ’n–Ê
-    public GameObject Obj1;  // “¹˜H
+    private int mapLevel;   // ï¿½}ï¿½bï¿½vï¿½Ìƒï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½Ïï¿½
+    public GameObject Obj0;  // ï¿½nï¿½ï¿½
+    public GameObject Obj1;  // ï¿½ï¿½ï¿½H
     public GameObject Obj2;  // storeA
     public GameObject Obj3;  // storeB
     public GameObject Obj4;  // storeC
     private const int fieldSize = 3;    
-    private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:“¹ 1:“XA 2:“XB 3:“XC
+    private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:ï¿½ï¿½ 1:ï¿½XA 2:ï¿½XB 3:ï¿½XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
     
     private void Awake()
     {
-        // ƒVƒ“ƒOƒ‹ƒgƒ“
+        // ï¿½Vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½gï¿½ï¿½
         if (Instance == null)
         {
             Instance = this;
@@ -33,7 +33,7 @@ public class FieldMaker : MonoBehaviour
 
     void Start()
     {
-        //ƒ}ƒbƒvî•ñ‚Ì‰Šú‰»
+        //ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < fieldSize; i++)
         {
             for (int j = 0; j < fieldSize; j++)
@@ -65,9 +65,9 @@ public class FieldMaker : MonoBehaviour
     }
 
     /*
-    @ brief ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
-    @ param Position ¶¬‚·‚éˆÊ’u(vector3)
-    @ param ObjNumber 0:“¹ 1:“XA 2:“XB 3:“XC
+    @ brief ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½Ìï¿½ï¿½ï¿½
+    @ param Position ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’u(vector3)
+    @ param ObjNumber 0:ï¿½ï¿½ 1:ï¿½XA 2:ï¿½XB 3:ï¿½XC
     */
     void SetInstance(Vector3 Position, int ObjNumber)
     {
@@ -93,15 +93,19 @@ public class FieldMaker : MonoBehaviour
     }
 
     /*
-    @ brief ƒ}ƒbƒv‚ÌƒŒƒxƒ‹‚ğİ’è
+    @ brief ï¿½}ï¿½bï¿½vï¿½Ìƒï¿½ï¿½xï¿½ï¿½ï¿½ï¿½İ’ï¿½
     */
     void SetMapLevel(int levelNum)
     {
         mapLevel = levelNum;
     }
 
-    void Build(int x, int z, int objectNum) 
+    public void Build(Vector3 hitPos, int objectNum) 
     {
+        int x = (int)(hitPos.x + 0.5);
+        int z = (int)(hitPos.z + 0.5);
+        if (x < 0 || z < 0 || x >= fieldSize || z >= fieldSize) return;
+
         Destroy(fieldObjectData[x, z]);
         SetInstance(new Vector3(x, 0, z), objectNum);
         fieldData[x, z] = objectNum;
