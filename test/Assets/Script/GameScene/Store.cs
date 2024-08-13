@@ -6,22 +6,28 @@ public class Store : MonoBehaviour
 {
     [SerializeField]
     private int rank;  // 店のランク
-    private const int maxRank = 5;  // ランク上限　必要なら
+    private const int maxRank = 3;  // ランク上限　必要なら
     private int totalSales = 0;  // 総売り上げ
 
-    // sound
-    /*
-    AudioSource audioSource;
+    //外観をmeshfilterとmaterialから変更
     [SerializeField]
-    private AudioClip saleSound;
-    */
-    
+    private Mesh[] meshs = new Mesh[maxRank];
+    [SerializeField]
+    private Material[] materials = new Material[maxRank];
+
+    private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        audioSource = GetComponent<AudioSource>();
-        */
+        rank = 1;
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
+
+        meshFilter.mesh = meshs[rank - 1];
+        meshRenderer.material = materials[rank - 1];
     }
 
     // Update is called once per frame
@@ -34,7 +40,6 @@ public class Store : MonoBehaviour
     public void Sale()
     {
         totalSales += CalcSale();
-        //audioSource.PlayOneShot(saleSound);
     }
 
     public int getTotalSales()
@@ -55,10 +60,12 @@ public class Store : MonoBehaviour
     public void RankUp()
     {
         // ランク上限あるなら
-        if (rank <= maxRank)
+        if (rank < maxRank)
         {
             rank++;
         }
+        meshFilter.mesh = meshs[rank - 1];
+        meshRenderer.material = materials[rank - 1];
     }
 
     // 収益計算
