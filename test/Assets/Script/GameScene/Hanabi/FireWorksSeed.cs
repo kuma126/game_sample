@@ -38,7 +38,7 @@ public class FireWorksSeed : MonoBehaviour
         }
     }
 
-    void update()
+    void Update()
     {
         if (Input.GetKeyDown("space"))
         {
