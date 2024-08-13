@@ -30,6 +30,7 @@ public class FireWorksSeed : MonoBehaviour
             for (j = 0; j < 4; j++)
             {
                 g = Instantiate(kayaku, Position, Quaternion.identity, myTransform);
+                g.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 fireWorksIns = g.GetComponent<FireWorks>();
                 fireWorksIns.SetSpeed(Velocity.x, Velocity.y, Velocity.z);
                 Velocity = Quaternion.Euler(0, 0, 90) * Velocity;
