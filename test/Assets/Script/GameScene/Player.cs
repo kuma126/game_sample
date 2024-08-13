@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
     FieldMaker fieldMaker;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
             if (raycastHitList.Any())
             {
                 Vector3 hitPos = raycastHitList.First().point;
-                fieldMaker.Build(hitPos.x, hitPos.z, 2);
+                fieldMaker.Build(hitPos, 2);
             }
         }
     }

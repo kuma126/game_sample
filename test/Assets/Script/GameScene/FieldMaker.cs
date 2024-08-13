@@ -14,7 +14,7 @@ public class FieldMaker : MonoBehaviour
     public GameObject Obj2;  // storeA
     public GameObject Obj3;  // storeB
     public GameObject Obj4;  // storeC
-    private const int fieldSize = 3;    
+    private const int fieldSize = 10;    
     private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:“¹ 1:“XA 2:“XB 3:“XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
     
@@ -100,8 +100,12 @@ public class FieldMaker : MonoBehaviour
         mapLevel = levelNum;
     }
 
-    void Build(int x, int z, int objectNum) 
+    public void Build(Vector3 hitPos, int objectNum) 
     {
+        int x = (int)(hitPos.x + 0.5);
+        int z = (int)(hitPos.z + 0.5);
+        if (x < 0 || z < 0 || x >= fieldSize || z >= fieldSize) return;
+
         Destroy(fieldObjectData[x, z]);
         SetInstance(new Vector3(x, 0, z), objectNum);
         fieldData[x, z] = objectNum;
