@@ -14,7 +14,7 @@ public class FieldMaker : MonoBehaviour
     public GameObject Obj2;  // storeA
     public GameObject Obj3;  // storeB
     public GameObject Obj4;  // storeC
-    private const int fieldSize = 3;    
+    private const int fieldSize = 10;    
     private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:�� 1:�XA 2:�XB 3:�XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
     
