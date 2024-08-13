@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitleButton : MonoBehaviour
+
+public class Stage3 : MonoBehaviour
 {
     Button button;
     ChangeScene changescene;
@@ -13,7 +14,7 @@ public class TitleButton : MonoBehaviour
         button = GetComponent<Button>();
         changescene = GetComponent<ChangeScene>();
 
-        button.onClick.AddListener(changescene.Title);
+        button.onClick.AddListener(changescene.Game);
     }
 
     void Update()
