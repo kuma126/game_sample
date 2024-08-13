@@ -3,24 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-@ brief ƒ}ƒbƒv‚ğì‚éC“ïˆÕ“x‚É‰‚¶‚Ä•ÏX
+@ brief ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½Õ“xï¿½É‰ï¿½ï¿½ï¿½ï¿½Ä•ÏX
 */
 public class FieldMaker : MonoBehaviour
 {
     public static FieldMaker Instance = null;
-    private int mapLevel;   // ƒ}ƒbƒv‚ÌƒŒƒxƒ‹‚ğŒˆ‚ß‚é•Ï”
-    public GameObject Obj0;  // ’n–Ê
-    public GameObject Obj1;  // “¹˜H
+    private int mapLevel;   // ï¿½}ï¿½bï¿½vï¿½Ìƒï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½Ïï¿½
+    public GameObject Obj0;  // ï¿½nï¿½ï¿½
+    public GameObject Obj1;  // ï¿½ï¿½ï¿½H
     public GameObject Obj2;  // storeA
     public GameObject Obj3;  // storeB
     public GameObject Obj4;  // storeC
     private const int fieldSize = 10;    
-    private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:“¹ 1:“XA 2:“XB 3:“XC
+    private Block[,] fieldData = new Block[fieldSize, fieldSize]; // 0:ï¿½ï¿½ 1:ï¿½XA 2:ï¿½XB 3:ï¿½XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
+    
+
+    private enum Block
+    {
+        Road,
+        Ground,
+        StoreA,
+        StoreB,
+        StoreC
+    }
     
     private void Awake()
     {
-        // ƒVƒ“ƒOƒ‹ƒgƒ“
+        // ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
         if (Instance == null)
         {
             Instance = this;
@@ -33,17 +43,18 @@ public class FieldMaker : MonoBehaviour
 
     void Start()
     {
-        //ƒ}ƒbƒvî•ñ‚Ì‰Šú‰»
+
+        //  ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åˆæœŸåŒ–
         for (int i = 0; i < fieldSize; i++)
         {
             for (int j = 0; j < fieldSize; j++)
             {
-                fieldData[i, j] = 0;
+                fieldData[i, j] = Block.Ground;
             }
         }
         for (int i = 0; i < fieldSize; i++)
         {
-            fieldData[fieldSize / 2, i] = 1;
+            fieldData[fieldSize / 2, i] = Block.Road;
         }
 
         for (int i = 0; i < fieldSize; i++)
@@ -65,49 +76,88 @@ public class FieldMaker : MonoBehaviour
     }
 
     /*
-    @ brief ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
-    @ param Position ¶¬‚·‚éˆÊ’u(vector3)
-    @ param ObjNumber 0:“¹ 1:“XA 2:“XB 3:“XC
+    @ brief ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½Ìï¿½ï¿½ï¿½
+    @ param Position ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’u(vector3)
+    @ param ObjNumber 0:ï¿½ï¿½ 1:ï¿½XA 2:ï¿½XB 3:ï¿½XC
     */
-    void SetInstance(Vector3 Position, int ObjNumber)
+    void SetInstance(Vector3 position, Block blockType)
     {
-        switch (ObjNumber)
+        switch (blockType)
         {
-        case 0:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj0, Position, Quaternion.identity);
+        case Block.Road:
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj0, position, Quaternion.identity, this.gameObject.transform);
             break;
-        case 1:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj1, Position, Quaternion.identity);
+        case Block.Ground:
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj1, position, Quaternion.identity, this.gameObject.transform);
             break;
-        case 2:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj2, Position, Quaternion.identity);
+        case Block.StoreA:
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj2, position, Quaternion.identity, this.gameObject.transform);
             break;
-        case 3:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj3, Position, Quaternion.identity);
+        case Block.StoreB:
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj3, position, Quaternion.identity, this.gameObject.transform);
             break;
-        case 4:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj4, Position, Quaternion.identity);
+        case Block.StoreC:
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj4, position, Quaternion.identity, this.gameObject.transform);
             break;
         }
         
     }
 
     /*
-    @ brief ƒ}ƒbƒv‚ÌƒŒƒxƒ‹‚ğİ’è
+    @ brief ï¿½}ï¿½bï¿½vï¿½Ìƒï¿½ï¿½xï¿½ï¿½ï¿½ï¿½İ’ï¿½
     */
     void SetMapLevel(int levelNum)
     {
         mapLevel = levelNum;
     }
 
-    public void Build(Vector3 hitPos, int objectNum) 
+    public void Click(Vector3 clickPos)
     {
-        int x = (int)(hitPos.x + 0.5);
-        int z = (int)(hitPos.z + 0.5);
+        int x = (int)(clickPos.x + 0.5);
+        int z = (int)(clickPos.z + 0.5);
         if (x < 0 || z < 0 || x >= fieldSize || z >= fieldSize) return;
+        if (fieldData[x, z] == Block.Road) return;  // é“è·¯ä¸Šã«ã¯å»ºç¯‰ä¸å¯
+        if (!IsNextToRoad(x, z)) return;            // é“è·¯ã‹ã‚‰é›¢ã‚ŒãŸå ´æ‰€ã«ã¯å»ºç¯‰ä¸å¯
 
-        Destroy(fieldObjectData[x, z]);
-        SetInstance(new Vector3(x, 0, z), objectNum);
-        fieldData[x, z] = objectNum;
+
+        Build(x, z, GetNextType(fieldData[x,z]));
     }
+
+    private void Build(int x, int z, Block blockType) 
+    {
+        Destroy(fieldObjectData[x, z]);
+        SetInstance(new Vector3(x, 0, z), blockType);
+        fieldData[x, z] = blockType;
+       
+        
+    }
+
+    private Block GetNextType(Block type)
+    {
+        Block nextType = type;
+        if (nextType != Block.StoreC)
+        {
+            nextType = (Block)((int)nextType + 1);
+        }
+        return nextType;
+    }
+
+    // roadã«æ¥ã—ã¦ã„ã‚‹ã‹
+    private bool IsNextToRoad(int x, int z)
+    {
+        var dx = new int[4] { 0, -1, 0, 1 };
+        var dz = new int[4] { 1, 0, -1, 0 };
+
+        for (int i = 0; i < 4; i++)
+        {
+            var newX = x + dx[i];
+            var newZ = z + dz[i];
+            if (newX < 0 || newZ < 0 || newX >= fieldSize || newZ >= fieldSize) continue;
+            if (fieldData[newX, newZ] == Block.Road) return true;
+        }
+
+        return false;
+    }
+
+   
 }
