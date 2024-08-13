@@ -20,11 +20,12 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var raycastHitList = Physics.RaycastAll(ray).ToList();
-            if (raycastHitList.Any())
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            RaycastHit closestHit = hits.OrderBy(hit => hit.distance).FirstOrDefault();
+            if (closestHit.collider != null)
             {
-                Vector3 hitPos = raycastHitList.First().point;
-                fieldMaker.Build(hitPos, 2);
+                Vector3 hitPos = closestHit.point;
+                fieldMaker.Click(hitPos);
             }
         }
     }
