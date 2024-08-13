@@ -74,19 +74,19 @@ public class FieldMaker : MonoBehaviour
         switch (ObjNumber)
         {
         case 0:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj0, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj0, Position, Quaternion.identity, this.gameObject.transform);
             break;
         case 1:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj1, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj1, Position, Quaternion.identity, this.gameObject.transform);
             break;
         case 2:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj2, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj2, Position, Quaternion.identity, this.gameObject.transform);
             break;
         case 3:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj3, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj3, Position, Quaternion.identity, this.gameObject.transform);
             break;
         case 4:
-            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj4, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj4, Position, Quaternion.identity, this.gameObject.transform);
             break;
         }
         
