@@ -8,6 +8,7 @@ public class TitleButton : MonoBehaviour
     Button button;
     ChangeScene changescene;
 
+
     void Start()
     {
         button = GetComponent<Button>();
