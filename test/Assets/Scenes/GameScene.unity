@@ -883,8 +883,4 @@ SceneRoots:
   - {fileID: 841701799}
   - {fileID: 1358650014}
   - {fileID: 1183064827}
-<<<<<<< HEAD:test/Assets/Script/Scenes/GameScene.unity
   - {fileID: 235543555}
-=======
-  - {fileID: 1269219682}
->>>>>>> e1c342554257221d14fbe574c29a24f4f49cedc6:test/Assets/Scenes/GameScene.unity
