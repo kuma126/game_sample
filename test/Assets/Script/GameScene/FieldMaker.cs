@@ -9,12 +9,14 @@ public class FieldMaker : MonoBehaviour
 {
     public static FieldMaker Instance = null;
     private int mapLevel;   // マップのレベルを決める変数
-    public GameObject Obj1;
-    public GameObject Obj2;
-    public GameObject Obj3;
-    public GameObject Obj4;
+    public GameObject Obj0;  // 地面
+    public GameObject Obj1;  // 道路
+    public GameObject Obj2;  // storeA
+    public GameObject Obj3;  // storeB
+    public GameObject Obj4;  // storeC
     private const int fieldSize = 10;    
     private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:道 1:店A 2:店B 3:店C
+    private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
     
     private void Awake()
     {
@@ -34,15 +36,32 @@ public class FieldMaker : MonoBehaviour
         //マップ情報の初期化
         for (int i = 0; i < fieldSize; i++)
         {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                fieldData[i, j] = 0;
+            }
+        }
+        for (int i = 0; i < fieldSize; i++)
+        {
+            fieldData[fieldSize / 2, i] = 1;
+        }
+
+        for (int i = 0; i < fieldSize; i++)
+        {
             for(int j = 0; j < fieldSize; j++) {
                 Vector3 pos;
                 pos.x = i * 1;
                 pos.z = j * 1;
                 pos.y = 0;
-                fieldData[i,j] = 0;
                 SetInstance(pos, fieldData[i,j]);
             }
         }
+        
+    }
+
+    private void Update()
+    {
+        
     }
 
     /*
@@ -52,22 +71,25 @@ public class FieldMaker : MonoBehaviour
     */
     void SetInstance(Vector3 Position, int ObjNumber)
     {
-        GameObject g;
         switch (ObjNumber)
         {
         case 0:
-            g = Instantiate(Obj1, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj0, Position, Quaternion.identity);
             break;
         case 1:
-            g = Instantiate(Obj2, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj1, Position, Quaternion.identity);
             break;
         case 2:
-            g = Instantiate(Obj3, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj2, Position, Quaternion.identity);
             break;
         case 3:
-            g = Instantiate(Obj4, Position, Quaternion.identity);
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj3, Position, Quaternion.identity);
+            break;
+        case 4:
+            fieldObjectData[(int)Position.x, (int)Position.z] = Instantiate(Obj4, Position, Quaternion.identity);
             break;
         }
+        
     }
 
     /*
@@ -76,5 +98,16 @@ public class FieldMaker : MonoBehaviour
     void SetMapLevel(int levelNum)
     {
         mapLevel = levelNum;
+    }
+
+    public void Build(Vector3 hitPos, int objectNum) 
+    {
+        int x = (int)(hitPos.x + 0.5);
+        int z = (int)(hitPos.z + 0.5);
+        if (x < 0 || z < 0 || x >= fieldSize || z >= fieldSize) return;
+
+        Destroy(fieldObjectData[x, z]);
+        SetInstance(new Vector3(x, 0, z), objectNum);
+        fieldData[x, z] = objectNum;
     }
 }
