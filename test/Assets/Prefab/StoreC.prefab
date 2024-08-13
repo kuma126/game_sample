@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6567946144888448665}
   - component: {fileID: 6313253061158165282}
   - component: {fileID: 3239895993580817172}
-  - component: {fileID: 3515886840684519044}
+  - component: {fileID: 3507861187370532929}
   m_Layer: 0
   m_Name: StoreC
   m_TagString: Untagged
@@ -84,24 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3515886840684519044
-BoxCollider:
+--- !u!114 &3507861187370532929
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7983636943335647340}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a77229f3bc5b894ba6d171f68b8541b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rank: 3
