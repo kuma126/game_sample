@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Store : MonoBehaviour
 {
+    [SerializeField]
     private int rank;  // 店のランク
     private const int maxRank = 5;  // ランク上限　必要なら
     private int totalSales = 0;  // 総売り上げ
