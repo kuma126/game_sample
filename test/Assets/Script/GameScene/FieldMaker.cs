@@ -9,12 +9,14 @@ public class FieldMaker : MonoBehaviour
 {
     public static FieldMaker Instance = null;
     private int mapLevel;   // É}ÉbÉvÇÃÉåÉxÉãÇåàÇﬂÇÈïœêî
-    public GameObject Obj1;
-    public GameObject Obj2;
-    public GameObject Obj3;
-    public GameObject Obj4;
+    public GameObject Obj0;  // ínñ 
+    public GameObject Obj1;  // ìπòH
+    public GameObject Obj2;  // storeA
+    public GameObject Obj3;  // storeB
+    public GameObject Obj4;  // storeC
     private const int fieldSize = 10;    
     private int[,] fieldData = new int[fieldSize, fieldSize]; // 0:ìπ 1:ìXA 2:ìXB 3:ìXC
+    //private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
     
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class FieldMaker : MonoBehaviour
                 SetInstance(pos, fieldData[i,j]);
             }
         }
+        
     }
 
     /*
@@ -56,18 +59,22 @@ public class FieldMaker : MonoBehaviour
         switch (ObjNumber)
         {
         case 0:
-            g = Instantiate(Obj1, Position, Quaternion.identity);
+            g = Instantiate(Obj0, Position, Quaternion.identity);
             break;
         case 1:
-            g = Instantiate(Obj2, Position, Quaternion.identity);
+            g = Instantiate(Obj1, Position, Quaternion.identity);
             break;
         case 2:
-            g = Instantiate(Obj3, Position, Quaternion.identity);
+            g = Instantiate(Obj2, Position, Quaternion.identity);
             break;
         case 3:
+            g = Instantiate(Obj3, Position, Quaternion.identity);
+            break;
+        case 4:
             g = Instantiate(Obj4, Position, Quaternion.identity);
             break;
         }
+        //fieldObjectData[(int)Position.x, (int)Position.z] = g;
     }
 
     /*
@@ -76,5 +83,10 @@ public class FieldMaker : MonoBehaviour
     void SetMapLevel(int levelNum)
     {
         mapLevel = levelNum;
+    }
+
+    void Build(int x, int y, int objectNum) 
+    {
+
     }
 }
