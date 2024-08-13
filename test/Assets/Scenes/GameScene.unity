@@ -1023,11 +1023,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1101b76cea0c8446b876a46caaed726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Obj0: {fileID: 7726463041048296207, guid: 8dac178a764381c4492538c8d39b1f4f, type: 3}
-  Obj1: {fileID: 8944987530100059513, guid: baad84a3db51ad9409cb48b936814f6d, type: 3}
-  Obj2: {fileID: 7835970725671784105, guid: fab6ebadaa90af64f9cacfd10e1dc7c1, type: 3}
-  Obj3: {fileID: 696553569566177671, guid: d0114c299bc383542b56d311c8492142, type: 3}
-  Obj4: {fileID: 7983636943335647340, guid: 42ea6faeac575514d913f0fb800e9d6a, type: 3}
+  road: {fileID: 7726463041048296207, guid: 8dac178a764381c4492538c8d39b1f4f, type: 3}
+  ground: {fileID: 8944987530100059513, guid: baad84a3db51ad9409cb48b936814f6d, type: 3}
+  store: {fileID: 1888057303198461212, guid: 3a0703381a61bfe47b5a8f8c46bf16de, type: 3}
 --- !u!4 &1269219682
 Transform:
   m_ObjectHideFlags: 0

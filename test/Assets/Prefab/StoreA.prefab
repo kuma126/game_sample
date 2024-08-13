@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2488580189578085607}
   - component: {fileID: 5290448963061194575}
   - component: {fileID: 2470614507271933215}
-  - component: {fileID: 8926875395262852410}
   - component: {fileID: 1317634747447762154}
   m_Layer: 0
   m_Name: StoreA
@@ -85,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8926875395262852410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7835970725671784105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a77229f3bc5b894ba6d171f68b8541b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rank: 1
 --- !u!65 &1317634747447762154
 BoxCollider:
   m_ObjectHideFlags: 0
