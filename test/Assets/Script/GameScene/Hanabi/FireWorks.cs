@@ -18,8 +18,8 @@ public class FireWorks : MonoBehaviour
     // —‰º‚µ‚È‚ª‚çŒõ‚ğŒ¸Š
     void Update()
     {
-        speedY -= 0.01f;
-        scale -= 0.001f;
+        speedY -= 0.001f;
+        scale -= 0.004f + (float)Random.value * 0.0005f;
         myTransform.position += new Vector3(speedX, speedY, speedZ) * Time.deltaTime;
         myTransform.localScale = new Vector3(scale, scale, scale);
 

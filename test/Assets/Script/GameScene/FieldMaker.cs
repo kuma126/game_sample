@@ -9,11 +9,9 @@ public class FieldMaker : MonoBehaviour
 {
     public static FieldMaker Instance = null;
     private int mapLevel;   // �}�b�v�̃��x�������߂�ϐ�
-    public GameObject Obj0;  // �n��
-    public GameObject Obj1;  // ���H
-    public GameObject Obj2;  // storeA
-    public GameObject Obj3;  // storeB
-    public GameObject Obj4;  // storeC
+    public GameObject road;  // �n��
+    public GameObject ground;  // ���H
+    public GameObject store;
     private const int fieldSize = 10;    
     private Block[,] fieldData = new Block[fieldSize, fieldSize]; // 0:�� 1:�XA 2:�XB 3:�XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
@@ -23,9 +21,7 @@ public class FieldMaker : MonoBehaviour
     {
         Road,
         Ground,
-        StoreA,
-        StoreB,
-        StoreC
+        Store,
     }
     
     private void Awake()
@@ -85,20 +81,15 @@ public class FieldMaker : MonoBehaviour
         switch (blockType)
         {
         case Block.Road:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj0, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(road, position, Quaternion.identity, this.gameObject.transform);
             break;
         case Block.Ground:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj1, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(ground, position, Quaternion.identity, this.gameObject.transform);
             break;
-        case Block.StoreA:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj2, position, Quaternion.identity, this.gameObject.transform);
+        case Block.Store:
+            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(store, position, Quaternion.identity, this.gameObject.transform);
             break;
-        case Block.StoreB:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj3, position, Quaternion.identity, this.gameObject.transform);
-            break;
-        case Block.StoreC:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(Obj4, position, Quaternion.identity, this.gameObject.transform);
-            break;
+
         }
         
     }
@@ -119,29 +110,31 @@ public class FieldMaker : MonoBehaviour
         if (fieldData[x, z] == Block.Road) return;  // 道路上には建築不可
         if (!IsNextToRoad(x, z)) return;            // 道路から離れた場所には建築不可
 
+        if (fieldData[x,z] == Block.Ground)
+        {
+            Build(x, z, Block.Store);
+        }
+        else if (fieldData[x,z] == Block.Store)
+        {
+            RankUp(x, z);
+        }
 
-        Build(x, z, GetNextType(fieldData[x,z]));
     }
 
     private void Build(int x, int z, Block blockType) 
     {
         Destroy(fieldObjectData[x, z]);
         SetInstance(new Vector3(x, 0, z), blockType);
-        fieldData[x, z] = blockType;
-       
-        
+        fieldData[x, z] = blockType;        
     }
 
-    private Block GetNextType(Block type)
+    private void RankUp(int x, int z)
     {
-        Block nextType = type;
-        if (nextType != Block.StoreC)
-        {
-            nextType = (Block)((int)nextType + 1);
-        }
-        return nextType;
+        // GetComponentは重い？　ランクアップはそこまで多くないから許容？
+        var storeScript = fieldObjectData[x, z].GetComponent<Store>();
+        storeScript.RankUp();
     }
-
+  
     // roadに接しているか
     private bool IsNextToRoad(int x, int z)
     {
