@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class SelectButton: MonoBehaviour
 {
     Button button;
-    ChangeScene changescene;
+    TitleManager titleManager;
 
 
     void Start()
     {
         button = GetComponent<Button>();
-        changescene = GetComponent<ChangeScene>();
+        titleManager = GameObject.Find("TitleManager").GetComponent<TitleManager>();
 
-        button.onClick.AddListener(changescene.SelectStage);
+        button.onClick.AddListener(titleManager.SelectScene);
     }
 
     void Update()

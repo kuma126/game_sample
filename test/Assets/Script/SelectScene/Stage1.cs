@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class Stage1 : MonoBehaviour
 {
     Button button;
-    ChangeScene changescene;
+    SelectManager select;
 
     void Start()
     {
         button = GetComponent<Button>();
-        changescene = GetComponent<ChangeScene>();
+        select = GameObject.Find("SelectManager").GetComponent<SelectManager>();
 
-        button.onClick.AddListener(changescene.Game);
+        button.onClick.AddListener(select.GameScene);
     }
 
     void Update()
