@@ -80,7 +80,7 @@ public class FieldMaker : MonoBehaviour
                 SetInstance(pos, fieldData[i,j]);
             }
         }
-
+        
     }
 
     private void Update()
@@ -290,11 +290,23 @@ public class FieldMaker : MonoBehaviour
         return Direction.None;
     }
 
+    public bool IsRoad(int x, int z)
+    {
+        if ((x >= 0 && x < fieldSize) && (z >= 0 && z < fieldSize))
+        {
+            if (fieldData[x, z] == Block.Road)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public GameObject GetStore(Vector3 targetPosition)
     {
         var x = (int)targetPosition.x;
         var z = (int)targetPosition.z;
-        if ((x > 0 && x < fieldSize) && (z > 0 && z < fieldSize))
+        if ((x >= 0 && x < fieldSize) && (z >= 0 && z < fieldSize))
         {
             if (fieldData[x, z] != Block.Store)
             {
@@ -308,6 +320,5 @@ public class FieldMaker : MonoBehaviour
 
         return fieldObjectData[x, z];
     }
-
-    
+  
 }

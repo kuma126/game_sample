@@ -11,10 +11,15 @@ public class Consumer : MonoBehaviour
     // 花火を上げれば上げるほどスピードが遅くなるぞ
     // private int money = 10000;  //客の所持金 いらないかも
     private Vector3 myGridPos; // 客のグリッド位置
+    private Vector3 oldGridPos; // 前のグリッド位置
+    private Vector3 currentGridPos; // 今のグリッド位置
+    private Vector3 targetGridPos; // 向かうグリッド位置
     private bool isBuying;
+    private bool isMoving; // 移動中？
     private Transform myTransform = null;
     FieldMaker fieldMaker; // フィールド情報を取得するため最初にもってくる
     Store currentStore; // 取引する店
+    [SerializeField]
     GridConverter gridConverter;
 
     private void Awake()
@@ -22,14 +27,21 @@ public class Consumer : MonoBehaviour
         myGridPos = Vector3.zero;
         myTransform = this.gameObject.transform;
         fieldMaker = GameObject.Find("FieldMaker").GetComponent<FieldMaker>() ;
-        gridConverter = new GridConverter();
+        currentGridPos = myGridPos;
+        isMoving = false;
+        oldGridPos.x = -1;
+    }
+
+    private void Start()
+    {
+        checkGridPos();
+        currentGridPos = myGridPos;
     }
 
     void Update()
     {
         checkGridPos();
         Move();
-
     }
 
     void BuySomething()
@@ -40,8 +52,48 @@ public class Consumer : MonoBehaviour
 
     void Move()
     {
-        // 道を見て移動する
-        transform.Translate(0.0f, 0.0f, 0.001f);
+        var dx = new int[4] { 0, -1, 0, 1 };
+        var dz = new int[4] { 1, 0, -1, 0 };
+        // 道を見て移動する，ターゲットになる位置を決める
+        if (isMoving)
+        {
+            // 比較するなら移動のズレに注意
+            if ((myTransform.position - targetGridPos).sqrMagnitude < 0.01)
+            {
+                isMoving = false;
+                currentGridPos = targetGridPos; // 元の位置の更新
+            }
+            else
+            {
+                myTransform.position = Vector3.MoveTowards(myTransform.position, targetGridPos, 0.4f * Time.deltaTime);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                var newX = currentGridPos.x + dx[i];
+                var newZ = currentGridPos.z + dz[i];
+                if (newX == oldGridPos.x && newZ == oldGridPos.z)
+                {
+                    // 元来た道なら無視
+                    continue;
+                }
+                if (fieldMaker.IsRoad((int)newX, (int)newZ))
+                {
+                    targetGridPos.x = newX;
+                    targetGridPos.z = newZ;
+                    isMoving = true;
+                    //Debug.Log(oldGridPos.x);
+                    //Debug.Log(oldGridPos.z);
+                    if (Random.value < 0.5)
+                    {
+                        break;
+                    }
+                }
+            }
+            oldGridPos = currentGridPos;
+        }
 
         if (isBuying)
         {
@@ -53,13 +105,11 @@ public class Consumer : MonoBehaviour
         store = null;
 
         // 上下左右確認
-        var dx = new int[4] { 0, -1, 0, 1 };
-        var dz = new int[4] { 1, 0, -1, 0 };
         for (int i = 0; i < 4; i++) //一マスで買い物できるのは1個までってことで
         {
             Vector3 checkGrid = Vector3.zero;
-            var newX = myGridPos.x + dx[i];
-            var newZ = myGridPos.z + dz[i];
+            var newX = currentGridPos.x + dx[i];
+            var newZ = currentGridPos.z + dz[i];
             checkGrid.x = newX;
             checkGrid.z = newZ;
             store = fieldMaker.GetStore(checkGrid); // 店チェック
