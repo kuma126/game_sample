@@ -181,7 +181,7 @@ public class FieldMaker : MonoBehaviour
         return false;
     }
 
-    public GameObject StoreExists(Vector3 targetPosition)
+    public GameObject GetStore(Vector3 targetPosition)
     {
         var x = (int)targetPosition.x;
         var z = (int)targetPosition.z;
