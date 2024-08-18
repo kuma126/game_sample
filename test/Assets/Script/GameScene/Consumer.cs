@@ -66,6 +66,13 @@ public class Consumer : MonoBehaviour
             else
             {
                 myTransform.position = Vector3.MoveTowards(myTransform.position, targetGridPos, 0.4f * Time.deltaTime);
+                var direction = targetGridPos - myTransform.position;
+                direction.y = 0;
+                if (direction != Vector3.zero)
+                {
+                    var lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+                    myTransform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);
+                }
             }
         }
         else
