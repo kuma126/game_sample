@@ -222,7 +222,14 @@ public class FieldMaker : MonoBehaviour
     {
         var x = (int)targetPosition.x;
         var z = (int)targetPosition.z;
-        if (fieldData[x, z] != Block.Store)
+        if ((x > 0 && x < fieldSize) && (z > 0 && z < fieldSize))
+        {
+            if (fieldData[x, z] != Block.Store)
+            {
+                return null;
+            }
+        }
+        else
         {
             return null;
         }

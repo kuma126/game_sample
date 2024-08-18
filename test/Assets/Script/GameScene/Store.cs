@@ -31,6 +31,7 @@ public class Store : MonoBehaviour
     public void Sale()
     {
         totalSales += CalcSale();
+        Debug.Log(totalSales);
     }
 
     public int GetTotalSales()
@@ -60,7 +61,7 @@ public class Store : MonoBehaviour
     // Žû‰vŒvŽZ
     private int CalcSale()
     {
-        int sale = rank * 1000;  // “K“–‚ÈŒvŽZŽ®
+        int sale = (rank + 1) * 1000;  // “K“–‚ÈŒvŽZŽ®
         return sale;
     }
 
