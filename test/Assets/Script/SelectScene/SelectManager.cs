@@ -33,7 +33,6 @@ public class SelectManager : MonoBehaviour
 
     public void TitleScene()
     {
-        //ƒV[ƒ“‚ªØ‚è‘Ö‚í‚Á‚Ä‚à‰¹‚ª“rØ‚ê‚È‚¢‚æ‚¤‚É‚·‚é
         DontDestroyOnLoad(back.gameObject);
         StartCoroutine(PlayBackSound());
     }

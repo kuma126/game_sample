@@ -14,10 +14,16 @@ public class FireWorksSeed : MonoBehaviour
     public GameObject kayaku3;
     public GameObject kayaku4;
 
+    //花火のSE
+    public AudioSource hanabiSE;
+
     void Start()
     {
         myTransform = this.gameObject.transform;
         LaunchFireWorks();
+
+        //サウンドのコンポーネント取得
+        hanabiSE = GetComponent<AudioSource>();
     }
 
     void LaunchFireWorks()
@@ -77,6 +83,7 @@ public class FireWorksSeed : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             LaunchFireWorks();
+            hanabiSE.Play();
         }
     }
 }
