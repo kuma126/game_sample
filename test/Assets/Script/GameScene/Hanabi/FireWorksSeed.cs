@@ -38,7 +38,7 @@ public class FireWorksSeed : MonoBehaviour
         {
             //層にする
             double checkValue = (double)t / loopNum; //色変更用の数字 ランダムでも可
-            Debug.Log(checkValue);
+            //Debug.Log(checkValue);
             if (checkValue <= 0.25)
             {
                 kayakuColor = kayaku1;
