@@ -10,4 +10,16 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("SelectScene");
     }
+
+    public void Title()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void Game()
+    {
+        SceneManager.LoadScene("GameScene");
+
+    }
+
 }

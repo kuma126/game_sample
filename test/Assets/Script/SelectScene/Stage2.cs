@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectButton: MonoBehaviour
+
+public class Stage2 : MonoBehaviour
 {
     Button button;
-    ChangeScene changescene;
-
+    SelectManager select;
 
     void Start()
     {
         button = GetComponent<Button>();
-        changescene = GetComponent<ChangeScene>();
+        select = GameObject.Find("SelectManager").GetComponent<SelectManager>();
 
-        button.onClick.AddListener(changescene.SelectStage);
+        button.onClick.AddListener(select.GameSceneB);
     }
 
     void Update()
