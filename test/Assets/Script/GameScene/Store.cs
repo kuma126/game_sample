@@ -5,29 +5,20 @@ using UnityEngine;
 public class Store : MonoBehaviour
 {
     [SerializeField]
-    private int rank;  // 店のランク
-    private const int maxRank = 3;  // ランク上限　必要なら
-    private int totalSales = 0;  // 総売り上げ
+    private int rank;               // 店のランク 0,1,2
+    private const int maxRank = 2;  // ランク上限　必要なら
+    private int totalSales = 0;     // 総売り上げ
 
-    //外観をmeshfilterとmaterialから変更
     [SerializeField]
-    private Mesh[] meshs = new Mesh[maxRank];
-    [SerializeField]
-    private Material[] materials = new Material[maxRank];
-
-    private MeshFilter meshFilter;
-    private MeshRenderer meshRenderer;
+    private GameObject[] storePrefabs;  // prefab
+    private GameObject storeChild;      // インスタンス保持
 
 
     // Start is called before the first frame update
     void Start()
     {
-        rank = 1;
-        meshFilter = GetComponent<MeshFilter>();
-        meshRenderer = GetComponent<MeshRenderer>();
-
-        meshFilter.mesh = meshs[rank - 1];
-        meshRenderer.material = materials[rank - 1];
+        rank = 0;
+        storeChild = Instantiate(storePrefabs[rank], transform.position, Quaternion.identity, this.gameObject.transform);
     }
 
     // Update is called once per frame
@@ -42,30 +33,28 @@ public class Store : MonoBehaviour
         totalSales += CalcSale();
     }
 
-    public int getTotalSales()
+    public int GetTotalSales()
     {
         return totalSales;
     }
 
-    public void setRank(int rank)
+    public void SetRank(int rank)
     {
         this.rank = rank;
     }
 
-    public int getRank()
+    public int GetRank()
     {
         return rank;
     }
 
     public void RankUp()
     {
-        // ランク上限あるなら
-        if (rank < maxRank)
-        {
-            rank++;
-        }
-        meshFilter.mesh = meshs[rank - 1];
-        meshRenderer.material = materials[rank - 1];
+        if (rank >= maxRank) return;  // ランク上限
+
+        rank++;
+        Destroy(storeChild);
+        storeChild = Instantiate(storePrefabs[rank], transform.position, Quaternion.identity, this.gameObject.transform);
     }
 
     // 収益計算
