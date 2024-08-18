@@ -43,9 +43,8 @@ public class FieldMaker : MonoBehaviour
 
     void Start()
     {
-
         //ステージ選択画面から
-    mapLevel = SelectManager.fieldNumber;
+        mapLevel = SelectManager.fieldNumber;
 
 
         switch (mapLevel)
@@ -72,7 +71,7 @@ public class FieldMaker : MonoBehaviour
                 SetInstance(pos, fieldData[i,j]);
             }
         }
-        
+
     }
 
     private void Update()
@@ -234,5 +233,6 @@ public class FieldMaker : MonoBehaviour
 
         return fieldObjectData[x, z];
     }
-   
+
+    
 }

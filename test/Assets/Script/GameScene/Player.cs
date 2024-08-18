@@ -14,10 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Vector3 defaultRotation;  // ‰ŠúŠp“x
 
-    private Vector3 startMousePos;
     private Vector3 preMousePos;
-    private Vector3 prePosition;
-    private Vector3 preRotation;
     [SerializeField]
     private float moveSpeed;    // •½sˆÚ“®‘¬“x
     [SerializeField]
