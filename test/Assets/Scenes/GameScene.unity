@@ -395,6 +395,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldMaker: {fileID: 1269219681}
+  defaultPosition: {x: 5, y: 2, z: -3}
+  defaultRotation: {x: 30, y: 0, z: 0}
+  moveSpeed: 10
+  rotateSpeed: 40
+  zoomSpeed: 1
 --- !u!4 &389592462
 Transform:
   m_ObjectHideFlags: 0
