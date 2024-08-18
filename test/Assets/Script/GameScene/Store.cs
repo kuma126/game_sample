@@ -20,8 +20,8 @@ public class Store : MonoBehaviour
     {
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         rank = 0;
-        storeChild = Instantiate(storePrefabs[rank], transform.position, Quaternion.identity, this.gameObject.transform);
-        
+        storeChild = Instantiate(storePrefabs[rank], transform.position, transform.rotation, this.gameObject.transform);
+        transform.position += Vector3.up * 0.35f;
     }
 
     // Update is called once per frame

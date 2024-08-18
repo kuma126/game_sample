@@ -27,6 +27,15 @@ public class FieldMaker : MonoBehaviour
         Store,
     }
 
+    private enum Direction
+    {
+        North,
+        East,
+        South,
+        West,
+        None,
+    }
+
 
     private void Awake()
     {
@@ -143,7 +152,6 @@ public class FieldMaker : MonoBehaviour
 
     }
 
-
     private void CreateMapC()
     {
         for (int i = 0; i < fieldSize; i++)
@@ -197,20 +205,23 @@ public class FieldMaker : MonoBehaviour
     @ param Position ��������ʒu(vector3)
     @ param ObjNumber 0:�� 1:�XA 2:�XB 3:�XC
     */
-    void SetInstance(Vector3 position, Block blockType)
+    void SetInstance(Vector3 position, Block blockType, Direction direction = Direction.North)
     {
         var x = (int)position.x;
         var z = (int)position.z;
+        var angle = (int)direction * 90;
+        var rotation = Quaternion.identity * Quaternion.AngleAxis(angle, Vector3.up);
+
         switch (blockType)
         {
         case Block.Road:
-            fieldObjectData[x, z] = Instantiate(road, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[x, z] = Instantiate(road, position, rotation, this.gameObject.transform);
             break;
         case Block.Ground:
-            fieldObjectData[x, z] = Instantiate(ground, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[x, z] = Instantiate(ground, position, rotation, this.gameObject.transform);
             break;
         case Block.Store:
-            fieldObjectData[x, z] = Instantiate(store, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[x, z] = Instantiate(store, position, rotation, this.gameObject.transform);
             break;
 
         }
@@ -231,11 +242,13 @@ public class FieldMaker : MonoBehaviour
         int z = (int)(clickPos.z + 0.5);
         if (x < 0 || z < 0 || x >= fieldSize || z >= fieldSize) return;
         if (fieldData[x, z] == Block.Road) return;  // 道路上には建築不可
-        if (!IsNextToRoad(x, z)) return;            // 道路から離れた場所には建築不可
+
+        var d = GetDirectionRoad(x, z);             // 面している道路の方向
+        if (d == Direction.None) return;            // 道路から離れた場所には建築不可
 
         if (fieldData[x,z] == Block.Ground)
         {
-            BuildStore(x, z);
+            BuildStore(x, z, d);
         }
         else if (fieldData[x,z] == Block.Store)
         {
@@ -244,7 +257,7 @@ public class FieldMaker : MonoBehaviour
 
     }
 
-    private void BuildStore(int x, int z) 
+    private void BuildStore(int x, int z, Direction direction) 
     {
         SetInstance(new Vector3(x, 0, z), Block.Store);
         fieldData[x, z] = Block.Store;        
@@ -257,21 +270,24 @@ public class FieldMaker : MonoBehaviour
         storeScript.RankUp();
     }
   
-    // roadに接しているか
-    private bool IsNextToRoad(int x, int z)
+    // roadに接している方向を返す
+    private Direction GetDirectionRoad(int x, int z)
     {
-        var dx = new int[4] { 0, -1, 0, 1 };
-        var dz = new int[4] { 1, 0, -1, 0 };
+        var dx = new int[4] { 0, 1, 0, -1 };
+        var dz = new int[4] { -1, 0, 1, 0 };
 
         for (int i = 0; i < 4; i++)
         {
             var newX = x + dx[i];
             var newZ = z + dz[i];
             if (newX < 0 || newZ < 0 || newX >= fieldSize || newZ >= fieldSize) continue;
-            if (fieldData[newX, newZ] == Block.Road) return true;
+            if (fieldData[newX, newZ] == Block.Road) 
+            {
+                return (Direction)i;
+            }
         }
 
-        return false;
+        return Direction.None;
     }
 
     public GameObject GetStore(Vector3 targetPosition)
