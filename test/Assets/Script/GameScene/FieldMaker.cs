@@ -259,7 +259,7 @@ public class FieldMaker : MonoBehaviour
 
     private void BuildStore(int x, int z, Direction direction) 
     {
-        SetInstance(new Vector3(x, 0, z), Block.Store);
+        SetInstance(new Vector3(x, 0.35f, z), Block.Store, direction);
         fieldData[x, z] = Block.Store;        
     }
 
