@@ -1,3 +1,4 @@
+using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,18 +40,20 @@ public class FieldMaker : MonoBehaviour
 
     void Start()
     {
+        mapLevel = 0;
 
-        //  フィールド初期化
-        for (int i = 0; i < fieldSize; i++)
+        //  現状mapAのみ作成
+        switch (mapLevel)
         {
-            for (int j = 0; j < fieldSize; j++)
-            {
-                fieldData[i, j] = Block.Ground;
-            }
-        }
-        for (int i = 0; i < fieldSize; i++)
-        {
-            fieldData[fieldSize / 2, i] = Block.Road;
+            case 0:
+                CreateMapA();
+                break;
+            case 1:
+                CreateMapB();
+                break;
+            case 2:
+                CreateMapC();
+                break;
         }
 
         for (int i = 0; i < fieldSize; i++)
@@ -71,6 +74,31 @@ public class FieldMaker : MonoBehaviour
         
     }
 
+    private void CreateMapA()
+    {
+        for (int i = 0; i < fieldSize; i++)
+        {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                fieldData[i, j] = Block.Ground;
+            }
+        }
+        for (int i = 0; i < fieldSize; i++)
+        {
+            fieldData[fieldSize / 2, i] = Block.Road;
+        }
+    }
+
+    private void CreateMapB()
+    {
+
+    }
+
+    private void CreateMapC()
+    {
+
+    }
+
     /*
     @ brief �C���X�^���X�̐���
     @ param Position ��������ʒu(vector3)
@@ -78,16 +106,18 @@ public class FieldMaker : MonoBehaviour
     */
     void SetInstance(Vector3 position, Block blockType)
     {
+        var x = (int)position.x;
+        var z = (int)position.z;
         switch (blockType)
         {
         case Block.Road:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(road, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[x, z] = Instantiate(road, position, Quaternion.identity, this.gameObject.transform);
             break;
         case Block.Ground:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(ground, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[x, z] = Instantiate(ground, position, Quaternion.identity, this.gameObject.transform);
             break;
         case Block.Store:
-            fieldObjectData[(int)position.x, (int)position.z] = Instantiate(store, position, Quaternion.identity, this.gameObject.transform);
+            fieldObjectData[x, z] = Instantiate(store, position, Quaternion.identity, this.gameObject.transform);
             break;
 
         }
@@ -112,7 +142,7 @@ public class FieldMaker : MonoBehaviour
 
         if (fieldData[x,z] == Block.Ground)
         {
-            Build(x, z, Block.Store);
+            BuildStore(x, z);
         }
         else if (fieldData[x,z] == Block.Store)
         {
@@ -121,11 +151,10 @@ public class FieldMaker : MonoBehaviour
 
     }
 
-    private void Build(int x, int z, Block blockType) 
+    private void BuildStore(int x, int z) 
     {
-        Destroy(fieldObjectData[x, z]);
-        SetInstance(new Vector3(x, 0, z), blockType);
-        fieldData[x, z] = blockType;        
+        SetInstance(new Vector3(x, 0, z), Block.Store);
+        fieldData[x, z] = Block.Store;        
     }
 
     private void RankUp(int x, int z)
@@ -152,5 +181,16 @@ public class FieldMaker : MonoBehaviour
         return false;
     }
 
+    public GameObject StoreExists(Vector3 targetPosition)
+    {
+        var x = (int)targetPosition.x;
+        var z = (int)targetPosition.z;
+        if (fieldData[x, z] != Block.Store)
+        {
+            return null;
+        }
+
+        return fieldObjectData[x, z];
+    }
    
 }
