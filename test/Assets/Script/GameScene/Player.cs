@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         InputUpdate();
+        LimitPosition();
         
     }
 
@@ -105,5 +106,18 @@ public class Player : MonoBehaviour
         transform.position += transform.forward * scroll * zoomSpeed;
 
         Camera.main.gameObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
+    }
+
+    private void LimitPosition()
+    {
+        float[] rangeX = { 0, 30 };
+        float[] rangeY = { 4, 10 };
+        float[] rangeZ = { 0, 30 };
+        var currentPosition = transform.position;
+        currentPosition.x = Mathf.Clamp(currentPosition.x, rangeX[0], rangeX[1]);
+        currentPosition.y = Mathf.Clamp(currentPosition.y, rangeY[0], rangeY[1]);
+        currentPosition.z = Mathf.Clamp(currentPosition.z, rangeZ[0], rangeZ[1]);
+
+        transform.position = currentPosition;
     }
 }
