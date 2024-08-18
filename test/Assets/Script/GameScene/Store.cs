@@ -13,12 +13,15 @@ public class Store : MonoBehaviour
     private GameObject[] storePrefabs;  // prefab
     private GameObject storeChild;      // インスタンス保持
 
+    private ScoreManager scoreManager;  //  収益管理クラス
 
     // Start is called before the first frame update
     void Start()
     {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         rank = 0;
         storeChild = Instantiate(storePrefabs[rank], transform.position, Quaternion.identity, this.gameObject.transform);
+        
     }
 
     // Update is called once per frame
@@ -30,8 +33,9 @@ public class Store : MonoBehaviour
     // 販売一回
     public void Sale()
     {
-        totalSales += CalcSale();
-        Debug.Log(totalSales);
+        var sales = CalcSale();
+        totalSales += sales;
+        scoreManager.AddScore(sales);
     }
 
     public int GetTotalSales()
