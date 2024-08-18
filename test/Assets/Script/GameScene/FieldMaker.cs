@@ -90,8 +90,22 @@ public class FieldMaker : MonoBehaviour
             }
         }
         for (int i = 0; i < fieldSize; i++)
-        {
+        { 
+            //メインロード
             fieldData[fieldSize / 2, i] = Block.Road;
+            fieldData[fieldSize / 2 + 1, i] = Block.Road;
+            fieldData[fieldSize / 2 - 1 , i] = Block.Road;
+
+            //周りの道
+            fieldData[0,i] = Block.Road;
+            fieldData[1, i] = Block.Road;
+            fieldData[fieldSize - 1, i] = Block.Road;
+            fieldData[fieldSize - 2, i] = Block.Road;
+
+            fieldData[i,0] = Block.Road;
+            fieldData[i, 1] = Block.Road;
+            fieldData[i, fieldSize - 1] = Block.Road;
+            fieldData[i, fieldSize - 2] = Block.Road;
         }
     }
 
@@ -107,9 +121,27 @@ public class FieldMaker : MonoBehaviour
 
         for (int i = 0; i < fieldSize; i++)
         {
+            //メインロード
             fieldData[fieldSize / 3, i] = Block.Road;
+            fieldData[fieldSize / 3 - 1, i] = Block.Road;
             fieldData[(fieldSize * 2 / 3), i] = Block.Road;
+            fieldData[(fieldSize * 2 / 3) + 1, i] = Block.Road;
+
         }
+
+        //枝分かれの細い道
+        for(int i = 0; i<fieldSize / 3; i++)
+        {
+            fieldData[i, fieldSize / 4] = Block.Road;
+            fieldData[i, fieldSize / 2] = Block.Road;
+        }
+
+        for (int i = fieldSize * 2 /3; i < fieldSize; i++)
+        {
+            fieldData[i, fieldSize / 3] = Block.Road;
+            fieldData[i, fieldSize * 2 / 3] = Block.Road;
+        }
+
     }
 
 
@@ -125,13 +157,40 @@ public class FieldMaker : MonoBehaviour
 
         for (int i = 0; i < fieldSize; i++)
         {
+            //メインロード
             fieldData[fieldSize / 3, i] = Block.Road;
-            fieldData[(fieldSize * 2 / 3 ), i] = Block.Road;
+            fieldData[fieldSize / 3 - 1, i] = Block.Road;
+            fieldData[(fieldSize * 2 / 3), i] = Block.Road;
+            fieldData[(fieldSize * 2 / 3) + 1, i] = Block.Road;
 
-            fieldData[i, fieldSize / 3] = Block.Road;
-            fieldData[i, (fieldSize * 2 / 3)] = Block.Road;
+            //周りの道
+            fieldData[0, i] = Block.Road;
+            fieldData[fieldSize - 1, i] = Block.Road;
+
+            fieldData[i, 0] = Block.Road;
+            fieldData[i, fieldSize - 1] = Block.Road;
 
         }
+
+        //枝分かれの細い道
+        for (int i = 0; i < fieldSize / 3; i++)
+        {
+            fieldData[i, fieldSize / 4] = Block.Road;
+            fieldData[i, fieldSize / 2] = Block.Road;
+        }
+
+        for (int i = fieldSize * 2 / 3; i < fieldSize; i++)
+        {
+            fieldData[i, fieldSize / 3] = Block.Road;
+            fieldData[i, fieldSize * 2 / 3] = Block.Road;
+        }
+
+        for(int i = fieldSize / 3; i < fieldSize * 2 / 3; i++)
+        {
+            fieldData[i, fieldSize / 2] = Block.Road;
+
+        }
+
     }
 
     /*
