@@ -15,10 +15,7 @@ public class FieldMaker : MonoBehaviour
     public GameObject store;
 
     //フィールドのサイズそれぞれ
-    private const int fieldSize = 10;
-    private const int fieldSizeB = 20;
-    private const int fieldSizeC = 30;
-
+    private const int fieldSize = 30;
 
     private Block[,] fieldData = new Block[fieldSize, fieldSize]; // 0:�� 1:�XA 2:�XB 3:�XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
@@ -47,9 +44,10 @@ public class FieldMaker : MonoBehaviour
     void Start()
     {
 
-    mapLevel = 1;
+        //ステージ選択画面から
+    mapLevel = SelectManager.fieldNumber;
 
-        //  現状mapAのみ作成
+
         switch (mapLevel)
         {
             case 0:

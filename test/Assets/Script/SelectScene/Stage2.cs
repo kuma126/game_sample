@@ -14,7 +14,7 @@ public class Stage2 : MonoBehaviour
         button = GetComponent<Button>();
         select = GameObject.Find("SelectManager").GetComponent<SelectManager>();
 
-        button.onClick.AddListener(select.GameScene);
+        button.onClick.AddListener(select.GameSceneB);
     }
 
     void Update()

@@ -35,7 +35,7 @@ public class SelectManager : MonoBehaviour
 
     public void GameSceneB()
     {
-        fieldNumber = 0;
+        fieldNumber = 1;
         //シーンが切り替わっても音が途切れないようにする
         DontDestroyOnLoad(select.gameObject);
         StartCoroutine(PlaySelectSound());
@@ -43,7 +43,7 @@ public class SelectManager : MonoBehaviour
 
     public void GameSceneC()
     {
-        fieldNumber = 0;
+        fieldNumber = 2;
         //シーンが切り替わっても音が途切れないようにする
         DontDestroyOnLoad(select.gameObject);
         StartCoroutine(PlaySelectSound());
