@@ -10,7 +10,8 @@ public class SelectManager : MonoBehaviour
      AudioSource select;
      AudioSource back;
 
-    // Start is called before the first frame update
+    public static int fieldNumber;
+
     void Start()
     {
         select = GameObject.Find("SelectSE").GetComponent<AudioSource>();
@@ -24,12 +25,31 @@ public class SelectManager : MonoBehaviour
         
     }
 
-    public void GameScene()
+    public void GameSceneA()
     {
+        fieldNumber = 0;
         //シーンが切り替わっても音が途切れないようにする
         DontDestroyOnLoad(select.gameObject);
         StartCoroutine(PlaySelectSound());
     }
+
+    public void GameSceneB()
+    {
+        fieldNumber = 0;
+        //シーンが切り替わっても音が途切れないようにする
+        DontDestroyOnLoad(select.gameObject);
+        StartCoroutine(PlaySelectSound());
+    }
+
+    public void GameSceneC()
+    {
+        fieldNumber = 0;
+        //シーンが切り替わっても音が途切れないようにする
+        DontDestroyOnLoad(select.gameObject);
+        StartCoroutine(PlaySelectSound());
+    }
+
+
 
     public void TitleScene()
     {

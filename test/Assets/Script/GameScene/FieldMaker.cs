@@ -13,10 +13,15 @@ public class FieldMaker : MonoBehaviour
     public GameObject road;  // �n��
     public GameObject ground;  // ���H
     public GameObject store;
-    private const int fieldSize = 10;    
+
+    //フィールドのサイズそれぞれ
+    private const int fieldSize = 10;
+    private const int fieldSizeB = 20;
+    private const int fieldSizeC = 30;
+
+
     private Block[,] fieldData = new Block[fieldSize, fieldSize]; // 0:�� 1:�XA 2:�XB 3:�XC
     private GameObject[,] fieldObjectData = new GameObject[fieldSize, fieldSize];
-    
 
     private enum Block
     {
@@ -24,7 +29,8 @@ public class FieldMaker : MonoBehaviour
         Ground,
         Store,
     }
-    
+
+
     private void Awake()
     {
         // シングルトン
@@ -40,7 +46,8 @@ public class FieldMaker : MonoBehaviour
 
     void Start()
     {
-        mapLevel = 0;
+
+    mapLevel = 1;
 
         //  現状mapAのみ作成
         switch (mapLevel)
@@ -55,6 +62,7 @@ public class FieldMaker : MonoBehaviour
                 CreateMapC();
                 break;
         }
+
 
         for (int i = 0; i < fieldSize; i++)
         {
@@ -91,12 +99,41 @@ public class FieldMaker : MonoBehaviour
 
     private void CreateMapB()
     {
+        for (int i = 0; i < fieldSize; i++)
+        {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                fieldData[i, j] = Block.Ground;
+            }
+        }
 
+        for (int i = 0; i < fieldSize; i++)
+        {
+            fieldData[fieldSize / 3, i] = Block.Road;
+            fieldData[(fieldSize * 2 / 3), i] = Block.Road;
+        }
     }
+
 
     private void CreateMapC()
     {
+        for (int i = 0; i < fieldSize; i++)
+        {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                fieldData[i, j] = Block.Ground;
+            }
+        }
 
+        for (int i = 0; i < fieldSize; i++)
+        {
+            fieldData[fieldSize / 3, i] = Block.Road;
+            fieldData[(fieldSize * 2 / 3 ), i] = Block.Road;
+
+            fieldData[i, fieldSize / 3] = Block.Road;
+            fieldData[i, (fieldSize * 2 / 3)] = Block.Road;
+
+        }
     }
 
     /*
