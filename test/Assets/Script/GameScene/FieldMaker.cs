@@ -274,7 +274,7 @@ public class FieldMaker : MonoBehaviour
     private Direction GetDirectionRoad(int x, int z)
     {
         var dx = new int[4] { 0, 1, 0, -1 };
-        var dz = new int[4] { -1, 0, 1, 0 };
+        var dz = new int[4] { 1, 0, -1, 0 };
 
         for (int i = 0; i < 4; i++)
         {
